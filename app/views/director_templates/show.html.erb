@@ -37,6 +37,7 @@
     <th></th>
   </tr>
   <% @filmography.each do |a_thing|%>
+    <% d = Director.where({ :id => a_thing.director_id }).at(0) %>
     <tr>
       <td>
         <%= a_thing.id %>
@@ -51,7 +52,6 @@
         <%= a_thing.year %>
       </td>
       <td>
-        <% d = Director.where({ :id => a_thing.director_id }).at(0) %>
         <%= d.name %>
       </td>
       <td><a href= "/movies/<%= a_thing.id%>">Show details</a></td>
