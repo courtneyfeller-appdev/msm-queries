@@ -12,12 +12,24 @@
   </tr>
   <% @list_of_movies.each do |a_thing|%>
     <tr>
-      <td><%= a_thing.id %></td>
-      <td><img src="http://robohash.org/<%= a_thing.id %>"></td>
-      <td><%= a_thing.title %></td>
-      <td><%= a_thing.year %></td>
-      <td><%= a_thing.director_id %></td>
+      <td>
+        <%= a_thing.id %>
+      </td>
+      <td>
+        <img src="http://robohash.org/<%= a_thing.id %>">
+      </td>
+      <td>
+        <%= a_thing.title %>
+      </td>
+      <td>
+        <%= a_thing.year %>
+      </td>
+      <td>
+        <% d = Director.where({ :id => a_thing.director_id }).at(0) %>
+        <%= d.name %>
+      </td>
       <td><a href= "/movies/<%= a_thing.id%>">Show details</a></td>
     </tr>
   <% end %>
 </table>
+

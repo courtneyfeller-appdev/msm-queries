@@ -1,21 +1,61 @@
-<h1>Director details</h1>
+<h1>Director #<%= @the_director.id%> details</h1>
+<p> 
+  <a href= "/directors">Go back</a> | 
+</p>
 
 <dl>
   <dt>Name</dt>
-  <dd></dd>
+  <dd> <%= @the_director.name%> </dd>
 
   <dt>DOB</dt>
-  <dd></dd>
+  <dd> <%= @the_director.dob%> </dd>
 
   <dt>Bio</dt>
-  <dd></dd>
+  <dd> <%= @the_director.bio%> </dd>
 
   <dt>Image</dt>
-  <dd></dd>
+  <dd> <img src="http://robohash.org/<%= @the_director.name %>"> </dd>
 
   <dt>Created at</dt>
-  <dd></dd>
+  <dd> <%= time_ago_in_words(@the_director.created_at)%> ago </dd>
 
   <dt>Updated at</dt>
-  <dd></dd>
+  <dd> <%= time_ago_in_words(@the_director.updated_at)%> ago </dd>
 </dl>
+
+
+<h2>Filmography</h2>
+
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </tr>
+  <% @filmography.each do |a_thing|%>
+    <tr>
+      <td>
+        <%= a_thing.id %>
+      </td>
+      <td>
+        <img src="http://robohash.org/<%= a_thing.id %>">
+      </td>
+      <td>
+        <%= a_thing.title %>
+      </td>
+      <td>
+        <%= a_thing.year %>
+      </td>
+      <td>
+        <% d = Director.where({ :id => a_thing.director_id }).at(0) %>
+        <%= d.name %>
+      </td>
+      <td><a href= "/movies/<%= a_thing.id%>">Show details</a></td>
+    </tr>
+  <% end %>
+</table>
+
